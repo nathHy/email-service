@@ -31,6 +31,10 @@ MAIL_GUN_API_USER
 ```
 4. Run `node src/app.js`
 
+## Demo
+
+available here as well http://54.252.135.231/mail
+
 ## Todo
 
 - Validation on email provider specific validations. EG total email limit, body size etc
