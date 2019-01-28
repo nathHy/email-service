@@ -1,7 +1,7 @@
 const requestSchema = {
   type: 'object',
-  required: ['from', 'to', 'cc', 'bcc', 'body'],
-  items: {
+  required: ['to', 'from', 'body'],
+  properties: {
     from: {
       type: 'string',
     },

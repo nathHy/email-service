@@ -4,6 +4,19 @@
 
 This repo contains a sample service to send emails. It uses both sendgrid and mailgun as the mail servers. It will first attempt to use mailgun, if that fails it will fallback to sendgrid automatically.
 
+The server exposes a single endpoint at `/mail`
+POST the following data to send an email:
+
+```
+{
+  "from": "<email>"
+  "to": [<email>],
+  "body": "body contents",
+}
+```
+
+Optional keys of `bcc` and `cc` are allowed
+
 ## Setup
 
 1. Clone the repo
@@ -28,3 +41,4 @@ MAIL_GUN_API_USER
   - Make more generic
   - Typescript would help enforce exports
 - Add a proper logger
+- Add proper responses that comply with json API spec.

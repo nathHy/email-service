@@ -1,12 +1,14 @@
+const _ = require('lodash');
+
 const API_USER = process.env.MAIL_GUN_API_USER;
 const API_KEY = process.env.MAIL_GUN_API_KEY;
 const API_URL = process.env.MAIL_GUN_API_URL;
-
 if ([API_USER, API_KEY, API_URL].includes(undefined)) {
   throw new Error('Missing env vars for mailgun');
 }
 
 function generateEmailString(emails) {
+  if (emails === undefined) emails = [];
   if (typeof emails === 'string') {
     emails = [emails];
   }
@@ -25,26 +27,26 @@ function generateUrl(user, key, url) {
   return `https://${user}:${key}@${url}/messages`;
 }
 
-function getRequestOptions({
-  to, from, cc, bcc, body,
-}) {
-  const form = {
+function getRequestOptions({ to, from, cc, bcc, body }) {
+  let form = {
     from,
     to: generateEmailString(to),
     cc: generateEmailString(cc),
     bcc: generateEmailString(bcc),
-    text: body,
+    text: body
   };
+  // remove empty values
+  form = _.pickBy(form, v => !_.isEmpty(v));
 
   return {
     url: generateUrl(API_USER, API_KEY, API_URL),
     method: 'POST',
-    form,
+    form
   };
 }
 
 module.exports = {
   clientName: 'mailgun',
   getRequestOptions,
-  validResponseCodes: [200],
+  validResponseCodes: [200]
 };

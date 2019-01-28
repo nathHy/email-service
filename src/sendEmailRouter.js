@@ -18,7 +18,7 @@ const validateData = (req, res, next) => {
   }
 };
 
-const sendMailMiddleware = async (req, res) => {
+const sendMailMiddleware = async (req, res, next) => {
   const emailData = _.pick(req.body, ['from', 'to', 'cc', 'bcc', 'body']);
   const mailSent = await Mailer.sendEmail(emailData);
   if (mailSent) {
@@ -26,7 +26,7 @@ const sendMailMiddleware = async (req, res) => {
       success: true,
     });
   } else {
-    throw new Error('Failed to send mail');
+    next(new Error('Failed to send mail'));
   }
 };
 
