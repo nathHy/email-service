@@ -1,5 +1,5 @@
-const request = require("request-promise-native");
-const { mailers } = require("./mailers");
+const request = require('request-promise-native');
+const { mailers } = require('./mailers');
 
 class Mailer {
   constructor({ clientName, getRequestOptions, validResponseCodes }) {
@@ -18,17 +18,17 @@ class Mailer {
         console.log('failed to send, trying other clients');
       } catch (error) {
         // handle client error codes
-        console.log("ERROR:", error.message);
-        return false;
+        console.log('ERROR:', error.message);
       }
+      return false;
     }
   }
 
   async send(data) {
     const request = this.generateRequest(data);
     const response = await request;
-    console.log("code:", response.statusCode);
-    console.log("body", response.body);
+    console.log('code:', response.statusCode);
+    console.log('body', response.body);
     return this.validResponseCodes.includes(response.statusCode);
   }
 
@@ -36,9 +36,9 @@ class Mailer {
     const mailerOptions = this.getRequestOptions(data);
     const options = {
       ...mailerOptions,
-      resolveWithFullResponse: true
+      resolveWithFullResponse: true,
     };
-    console.log("sending request with", options);
+    console.log('sending request with', options);
     return request(options);
   }
 }

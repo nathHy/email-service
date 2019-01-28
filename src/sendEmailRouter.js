@@ -1,10 +1,11 @@
 const express = require('express');
-const Mailer = require('./Mailer');
 const _ = require('lodash');
 const Ajv = require('ajv');
+const Mailer = require('./Mailer');
 
 const ajv = new Ajv({ allErrors: true });
 const requestSchema = require('./schemas/mailSchema');
+
 const Router = express.Router();
 
 const validateData = (req, res, next) => {
@@ -17,12 +18,12 @@ const validateData = (req, res, next) => {
   }
 };
 
-const sendMailMiddleware = async (req, res, next) => {
+const sendMailMiddleware = async (req, res) => {
   const emailData = _.pick(req.body, ['from', 'to', 'cc', 'bcc', 'body']);
   const mailSent = await Mailer.sendEmail(emailData);
   if (mailSent) {
     res.json({
-      success: true
+      success: true,
     });
   } else {
     throw new Error('Failed to send mail');

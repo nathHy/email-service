@@ -1,6 +1,6 @@
 module.exports = {
   mailers: [
-    require("./MailGun"),
-    require("./SendGrid"),
-  ]
+    require('./MailGun'),
+    require('./SendGrid'),
+  ],
 };

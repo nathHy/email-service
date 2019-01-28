@@ -3,24 +3,24 @@ const requestSchema = {
   required: ['from', 'to', 'cc', 'bcc', 'body'],
   items: {
     from: {
-      type: 'string'
+      type: 'string',
     },
     to: {
       type: 'array',
-      items: { type: 'string' }
+      items: { type: 'string' },
     },
     cc: {
       type: 'array',
-      items: { type: 'string' }
+      items: { type: 'string' },
     },
     bcc: {
       type: 'array',
-      items: { type: 'string' }
+      items: { type: 'string' },
     },
     body: {
-      type: 'string'
-    }
-  }
+      type: 'string',
+    },
+  },
 };
 
 module.exports = requestSchema;
